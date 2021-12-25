@@ -35,8 +35,26 @@ section code
   ;call _printA
 
   xor eax, eax
+  xor ecx, ecx
+  mov eax, bootingMessage
+  call _printA
+
+  xor eax, eax
+  xor ecx, ecx
+  ; need to change ecx to point to next line to print
+  ; 1 is the line no, 2nd line
+  ; 2 space of printing chars
+  ; 80 perline 80 chars allowed
+  mov ecx, 1 * 2 * 80
   mov eax, kernerlLoadingMessage
   call _printA
+
+  xor eax, eax
+  xor ecx, ecx
+  mov ecx, 2 * 2 * 80
+  mov eax, kernelSuccessCall
+  call _printA
+
 
   jmp _bootloaderEnd
 
@@ -59,6 +77,7 @@ _printA:
   jmp _printA
 
   _printEnd:
+    xor ebx, ebx
     ret
  
 _bootloaderEnd:
@@ -66,6 +85,8 @@ _bootloaderEnd:
 
 bootingMessage: db 'Maksudi Os booting ...', 0
 kernerlLoadingMessage: db 'MaksudNal Loading 1 2 3, lets jam....', 0
+kernelSuccessCall: db 'Kernel Successfully Loaded', 0
+
 times 510 - ($ - $$) db 0x00 ; padding 510 with this, cause this needs to be 512b file
 
 ;this indicates its not data, its exec shit
