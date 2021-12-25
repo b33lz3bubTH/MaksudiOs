@@ -4,29 +4,69 @@
 
 section code
 
-.main
+.init:
+  xor eax,eax
+  mov ax, 0x07c0
+  mov ds, ax          ; data segment initialize
+
   xor eax,eax
   mov ax, 0xb800      ;magic number
   mov es, ax          ;cant move direct value to es
-
-
-  mov byte [es:0x00], 'S'       ;character to print
-  mov byte [es: 0x1], 0x30      ; bg color code
-
-  ; [es: 0x1] = es(0xb800) + 0x01 ;
   
-  mov byte [es:0x02], 'E'       ;character to print
-  mov byte [es: 0x3], 0x30      ; bg color code
-  mov byte [es:0x04], 'X'       ;character to print
-  mov byte [es: 0x5], 0x30      ; bg color code
-  mov byte [es:0x06], 'y'       ;character to print
-  mov byte [es: 0x7], 0x30      ; bg color code
 
-jmp $               ; infinity loop
+  mov eax, 0x0
+  mov ebx, 0x0
+  mov ecx, 0x0
+  mov edx, 0x0
 
+.clear:
+  mov byte [es:eax], 0x00       ;character to print
+  inc eax
+  mov byte [es:eax], 0x00
+  inc eax
+
+  ;screen size 25 col 80 row 2 bytes 1 char
+  cmp eax, 2*25*80
+  jl .clear
+
+.main:
+  ;xor eax,eax
+  ;mov eax, bootingMessage
+  ;call _printA
+
+  xor eax, eax
+  mov eax, kernerlLoadingMessage
+  call _printA
+
+  jmp _bootloaderEnd
+
+
+; print functionality
+_printA:
+  ; eax must contain addr to te text printing
+  mov dl, byte[ eax + ebx] ;[0] of the strin pointed by eax
+
+  cmp dl, 0
+  je _printEnd
+
+  mov byte [es:ecx], dl ;passing the picked up value to the screen
+  inc ecx
+  mov byte [es:ecx], 0x1a
+  inc ecx
+
+  inc ebx     ;actual picking counter
+
+  jmp _printA
+
+  _printEnd:
+    ret
+ 
+_bootloaderEnd:
+  jmp $               ; infinity loop
+
+bootingMessage: db 'Maksudi Os booting ...', 0
+kernerlLoadingMessage: db 'MaksudNal Loading 1 2 3, lets jam....', 0
 times 510 - ($ - $$) db 0x00 ; padding 510 with this, cause this needs to be 512b file
-
-
 
 ;this indicates its not data, its exec shit
 db 0x55
