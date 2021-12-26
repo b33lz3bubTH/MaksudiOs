@@ -39,10 +39,6 @@ section code
   ; switch to protected mode
   jmp _switchToProtected
 
-  ;jmp _bootloaderEnd
-
-
-
 ; ================================== FUNCTIONS & LABELS DEFINATION BELOW =====================
 
 _switchToProtected:
@@ -55,8 +51,9 @@ _switchToProtected:
   mov cr0, eax
 
   ; jmp to the protected mode
-  jmp protectedInit
-
+  jmp _protectedInit
+  
+  ;jmp _bootloaderEnd
 ; print() 16bit mode
 _printA:
   ; eax must contain addr to te text printing
@@ -87,7 +84,7 @@ _clear:
   .clear_screen:
     mov byte [es:eax], 0x00       ;character to print
     inc eax
-    mov byte [es:eax], 0x00
+    mov byte [es:eax], 0x30
     inc eax
 
     ;screen size 25 col 80 row 2 bytes 1 char
@@ -100,11 +97,10 @@ _clear:
 bootingMessage: db 'MaksudiOs v1', 0
 switchingToProtectedMessage: db 'FROM: [16bit]  TO: [32bit] Switch', 0
 
-
-
 ;=================================================== 32 BIT MODE CODE ============================================================
 [bits 32]
-protectedInit:
+
+_protectedInit:
   mov ax, data_seg
   mov ds, ax
   mov ss, ax
@@ -117,7 +113,13 @@ protectedInit:
   mov esp, ebp
 
   ;systemhung
+  jmp _bootloaderEndThirtyTwoBitMode
+
+
+_bootloaderEndThirtyTwoBitMode:
   jmp $
+
+
 
 gdt_begin:
 gdt_null_descriptor:
