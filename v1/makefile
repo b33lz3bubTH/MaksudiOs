@@ -1,12 +1,24 @@
-all:
-	bootloader_build
-bootloader_build:
-	echo "BUILDING"
-	nasm ./bootloader/boot.asm -o ./bootloader/boot.img
+all: bootloader
 
-clean:
-	rm ./bootloader/boot.img
+basic:
+	nasm src/boot.asm -o src/bin/basicBoot.img
+
+bootloader:
+	mkdir -p src/bin
+	nasm src/boot.asm -f bin -o src/bin/boot.bin
+	nasm src/kernel_entry.asm -f elf -o src/bin/kernel_entry.bin
+
+	gcc -m32 -ffreestanding -c src/kernel/kernel.c -o src/bin/kernel.o
+	ld -m elf_i386 -o src/bin/kernel.img -Ttext 0x1000 src/bin/kernel_entry.bin src/bin/kernel.o
+
+	objcopy -O binary -j .text src/bin/kernel.img src/bin/kernel.bin
+	cat src/bin/boot.bin src/bin/kernel.bin > os.img
+
+clear:
+	rm -rf src/bin
 
 run:
-	qemu-system-x86_64 -m 64 -fda ./bootloader/boot.img
+	qemu-system-x86_64 -drive format=raw,file=os.img
 
+basicRun:
+	qemu-system-x86_64 -m 64 -fda src/bin/basicBoot.img
