@@ -55,3 +55,5 @@ dkms.conf
 
 v1/src/bin
 v1/os.img
+
+v2/bin
