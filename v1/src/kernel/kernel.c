@@ -8,6 +8,6 @@ int start() {
         *(video_memory + i + 1) = 0x1a;
     }
 
-    *(video_memory + 0) = 'M';
+    *(video_memory + 0) = 'C';
     *(video_memory + 1) = 0x30;
 }
