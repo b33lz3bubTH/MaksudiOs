@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 14 21:12:38 2022
+# Make data base, printed on Thu Jul 14 23:18:48 2022
 
 # Variables
 
@@ -23,13 +21,13 @@ PNPM_HOME = /home/sourav/.local/share/pnpm
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/home/sourav/.gtkrc:/home/sourav/.config/gtkrc
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-29c5d95a-9509-4e29-bd93-33e88737b8d4.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fae5cd8d-d0b2-4c6c-8a48-a260b5dfda59.sock
 # environment
 LC_NAME = en_IN
 # environment
 LC_NUMERIC = en_IN
 # environment
-VSCODE_CWD = /home/sourav/Documents/MaksudiOs/maksudiKernel_v1.0
+VSCODE_CWD = /home/sourav/Documents/MaksudiOs
 # environment
 WINDOWID = 100663298
 # environment
@@ -55,7 +53,7 @@ MAIL = /var/spool/mail/sourav
 # environment
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
 # environment
-OLDPWD = /home/sourav/Documents/MaksudiOs
+OLDPWD = /home/sourav/Documents
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -63,7 +61,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-ALACRITTY_SOCKET = /run/user/1000/Alacritty-:0-2562.sock
+ALACRITTY_SOCKET = /run/user/1000/Alacritty-:0-21239.sock
 # environment
 VSCODE_CODE_CACHE_PATH = /home/sourav/.config/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
@@ -111,7 +109,7 @@ ZSH = /home/sourav/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 14736
+VSCODE_PID = 34181
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -165,7 +163,7 @@ XDG_SEAT = seat0
 # environment
 XDG_CURRENT_DESKTOP = KDE
 # environment
-ALACRITTY_LOG = /tmp/Alacritty-2562.log
+ALACRITTY_LOG = /tmp/Alacritty-21239.log
 # environment
 LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
 # automatic
@@ -185,7 +183,7 @@ LOGNAME = sourav
 # environment
 XDG_VTNR = 1
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := all
 # environment
 SYSTEMD_EXEC_PID = 678
 # environment
@@ -249,7 +247,7 @@ KDE_FULL_SESSION = true
 # environment
 LC_IDENTIFICATION = en_IN
 # variable set hash-table stats:
-# Load=118/1024=12%, Rehash=0, Collisions=8/147=5%
+# Load=118/1024=12%, Rehash=0, Collisions=8/151=5%
 
 # Pattern-specific Variable Values
 
@@ -257,9 +255,9 @@ LC_IDENTIFICATION = en_IN
 
 # Directories
 
-# . (device 66306, inode 8398686): 6 files, no impossibilities.
+# . (device 66306, inode 8398686): 7 files, no impossibilities.
 
-# 6 files, no impossibilities in 1 directories.
+# 7 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -267,41 +265,91 @@ LC_IDENTIFICATION = en_IN
 
 # Files
 
+debug_bootloader:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 5):
+	ndisasm ./build/bin/boot.bin
+
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-all:
+all: bootloader
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+ 
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+
+run:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'makefile', line 13):
+	qemu-system-x86_64 -hda ./build/bin/boot.bin
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-07-14 21:12:09.715096641
+#  Last modified 2022-07-14 21:21:32.608458881
 #  File has been updated.
 #  Successfully updated.
 
+bootloader:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := bootloader
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'makefile', line 8):
+	mkdir -p build/bin
+	nasm -f bin ./src/boot.asm -o ./build/bin/boot.bin
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/14=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/21=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 11 / storage = 91 B / avg = 8 B
-# current buf: size = 8162 B / used = 91 B / count = 11 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 15 / storage = 129 B / avg = 8 B
+# current buf: size = 8162 B / used = 129 B / count = 15 / avg = 8 B
 
-# strcache performance: lookups = 15 / hit rate = 26%
+# strcache performance: lookups = 26 / hit rate = 42%
 # hash-table stats:
-# Load=11/8192=0%, Rehash=0, Collisions=0/15=0%
-# Finished Make data base on Thu Jul 14 21:12:38 2022
+# Load=15/8192=0%, Rehash=0, Collisions=0/26=0%
+# Finished Make data base on Thu Jul 14 23:18:48 2022
 
  

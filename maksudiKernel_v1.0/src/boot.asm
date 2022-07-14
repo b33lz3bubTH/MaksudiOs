@@ -3,8 +3,9 @@
 
 
 ; consideration
-; __funcName__
-; _funcNameUseLabel
+; __<funcName>__
+; _<funcName>Label
+; _interupt<IntName>_
 
 
 ; Real Mode
@@ -28,6 +29,16 @@ times 33 db 0   ; prevent writing somthing to our program [This is BIOS Paramete
 start:
     jmp 0x7c0:init         ;this will set the code segment to 0x7c0
 
+_interuptHandleZERO:
+    mov si, interuptZeroLabel
+    call __printF__
+    iret
+
+_interuptHandleONE:
+    mov si, interuptOneLabel
+    call __printF__
+    iret
+
 init:
     cli ;clear interupts
     mov ax, 0x7c0
@@ -38,6 +49,17 @@ init:
     mov sp, 0x7c00   
     sti ;enable interupts
 
+
+    ; interupt vector table add, custom interupt 
+    mov word[ss:0x00], _interuptHandleZERO      ; if ss isnt given, it will use ds(0x7c0) interupt needs 4 bytes
+    mov word[ss: 0x02], 0x7c0
+
+    mov word[ss:0x04], _interuptHandleONE      ; if ss isnt given, it will use ds(0x7c0)
+    mov word[ss: 0x06], 0x7c0                  ; 2bytes
+    
+    int 1
+    
+    
     mov si, bootloaderInit
     call __printF__
 
@@ -70,6 +92,9 @@ __printChar__:
 
 bootloaderInit: db 'Maksudi Os v1.0', 0xa, 0
 bootstrapingKernelLoadMessage: db 'Bootstraping ... [Kernel Loading]', 0xa, 0
+interuptZeroLabel: db 'Interupt Zero Occured', 0xa, 0
+interuptOneLabel: db 'Interupt One Occured', 0xa, 0
+
 
 times 510-($ - $$) db 0
 dw 0xAA55
