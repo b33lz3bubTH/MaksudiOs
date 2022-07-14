@@ -29,18 +29,54 @@ void drawRectangle(int x, int y, int width, int height,
     }
 }
 
-void drawCharacterText(char character) {
-    for (int y = 0; y < fontWidth; y++) {
-        unsigned int row = getFontCharacter((int)character, y);
+void drawCharacter(int (*fontLoader)(int, int), int fontWidth,
+    int fontHeight, char character ,int x, int y, int r, int g, int b) {
+        
+    for (int j = 0; j < fontHeight; j++) {
+        unsigned int row = (*fontLoader)((int)character, j);
         int shift = fontWidth - 1;
-        int bit_val = 0;
-        for (int x = 0; x < fontHeight; x++) {
+        int bitValue = 0;
+        for (int i = 0; i < fontWidth; i++) {
             // zero out everything except last value, bin arithmatic
-            bit_val = (row >> shift) & 0b00000000000000000000000000000001;
+            bitValue = (row >> shift) & 0b00000000000000000000000000000001;
 
-            if (bit_val == 1) drawAPixel(x, y, 255, 255, 255);
+            // print debug value for bitValue
+
+            if (bitValue == 1) drawAPixel((x+i), (y+j), r, g, b);
 
             shift += -1;
+        }
+    }
+}
+
+void printF(char* messageBuffer, int useDefault, int fontWidth,
+    int fontHeight, int x, int y, int r, int g, int b) {
+
+    int _fontWidth, _fontHeight, _r, _g, _b;
+    if(useDefault){
+        _fontWidth = systemDefaultFontWidth;
+        _fontHeight = systemDefaultFontHeight;
+        _r = 255;
+        _g = 0;
+        _b = 0;
+    }else{
+        _fontWidth = fontWidth;
+        _fontHeight = fontHeight;
+        _r = r;
+        _g = g;
+        _b = b;
+    }
+    // drawCharacter(getFontCharacter, systemDefaultFontWidth, systemDefaultFontHeight, 'A', 0, 0, 255, 0, 0);
+    int offsetI = 0, offsetJ = 0;
+
+    for(int messageBufferLen = 0; *(messageBuffer + messageBufferLen) != '\0'; messageBufferLen+=1){
+        if(*(messageBuffer + messageBufferLen) != '\n'){
+            drawCharacter(getFontCharacter, _fontWidth, _fontHeight, *(messageBuffer + messageBufferLen), (x+offsetI), (y+offsetJ),_r, _g, _b);
+        }
+        offsetI += _fontWidth;
+        if(*(messageBuffer + messageBufferLen) == '\n'){
+            offsetI = 0;
+            offsetJ += _fontHeight;
         }
     }
 }

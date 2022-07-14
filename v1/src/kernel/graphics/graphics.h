@@ -44,8 +44,8 @@ typedef struct VBEInfoBlockStruct {
 #define VBEInfoAddress 0x8000
 
 // System Font Import
-// extern const int fontWidth;
-// extern const int fontHeight;
+extern const int systemDefaultFontWidth;
+extern const int systemDefaultFontHeight;
 
 int getFontCharacter(int index, int y);
 
@@ -55,9 +55,10 @@ void drawAPixel(int x, int y, int r, int g, int b);
 void clearScreen(int r, int g, int b);
 void drawRectangle(int x, int y, int width, int height, 
                     int r, int g, int b);
-void drawCharacterText(char character);
+void drawCharacter(int (*fontLoader)(int, int), int fontWidth,
+    int fontHeight, char character ,int x, int y, int r, int g, int b);
 
-
-
+void printF(char* messageBuffer, int useDefault, int fontWidth,
+    int fontHeight, int x, int y, int r, int g, int b);
 
 #endif

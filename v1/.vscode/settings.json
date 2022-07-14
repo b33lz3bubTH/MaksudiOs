@@ -5,7 +5,15 @@
         "random": "c",
         "chrono": "c",
         "variant": "c",
-        "valarray": "c"
+        "valarray": "c",
+        "array": "c",
+        "*.tcc": "c",
+        "memory": "c",
+        "future": "c",
+        "istream": "c",
+        "functional": "c",
+        "tuple": "c",
+        "utility": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.formatting": "vcFormat"

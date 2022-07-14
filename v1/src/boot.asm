@@ -31,7 +31,7 @@ section code
 
     ;Graphics Mode init
     mov ax, 0x4f01  ;query-ing the VBE
-    mov cx, 0x117   ; mode
+    mov cx, 0x111  ; mode screen resolution => search for vbe-modex for video mode for listing
     mov bx, 0x0800  ;offset for vbe info strucutre
     mov es, bx
     mov di, 0x00
@@ -40,7 +40,7 @@ section code
 
     ; make switch to graphics mode
     mov ax, 0x4f02
-    mov bx, 0x117
+    mov bx, 0x111   ; mode screen resolution => search vbe-modex for video mode for lisitng
     int 0x10
 
 
@@ -52,7 +52,9 @@ section code
 
     mov bx, 0x1000  ;This is the location where the code is loaded from hard disk
     mov ah, 0x02
-    mov al, 21       ;The number of sectors to read from hard disk, changes on how big OS gets.
+    ; Blink Err Main Cause [last worked value 21] [tried upto 38]
+    mov al, 21     ;[The number of sectors to read from hard disk, changes on how big OS gets.]
+    ; Blink Err Main Cause
     mov ch, 0x00
     mov dh, 0x00
     mov cl, 0x02

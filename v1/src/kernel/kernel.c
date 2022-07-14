@@ -1,6 +1,4 @@
 #include "graphics/graphics.h"
-VBEInfoBlock* gVBEInfo;
-
 /*
     RGB
     R - 4bits
@@ -9,15 +7,13 @@ VBEInfoBlock* gVBEInfo;
 */
 
 int start() {
-    // video_memory = (char *)0xb8000;
-    // gVBEInfo = (VBEInfoBlock *)VBEInfoAddress;
-    // for (int i = 0; i < gVBEInfo->xResolution * gVBEInfo->yResolution; i++) {
-    //     *((unsigned short *)gVBEInfo->screenPtr + i) = RGBProcessor(245, 237, 220);
-    // }
-    clearScreen(245, 237, 220);
-    drawRectangle(20, 40, 50, 40, 0, 0, 0);
-    drawRectangle(45, 40, 50, 40, 0, 0, 0);
-    // drawCharacterText('A');
-    // while(1);
+    clearScreen(10, 10, 10);
+    // drawRectangle(45, 40, 50, 40, 0, 0, 0);
+    // drawCharacter(getFontCharacter, systemDefaultFontWidth, systemDefaultFontHeight, 'A', 0, 0, 255, 0, 0);
+    char welcomeMessage[] = "Maksudi Os v1.0\n";
+    char* ptrWelcomeMessage = welcomeMessage;
+
+    printF(ptrWelcomeMessage, 1, 0, 0, 0, 0, 0, 0, 0);
+    while (1);
 
 }

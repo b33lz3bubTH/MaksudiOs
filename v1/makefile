@@ -8,7 +8,7 @@ bootloader:
 	nasm src/boot.asm -f bin -o src/bin/boot.bin
 	nasm src/kernel_entry.asm -f elf -o src/bin/kernel_entry.bin
 
-	gcc -o src/bin/kernel.o -m32 -ffreestanding -c src/kernel/bootstrap.c
+	gcc -o src/bin/kernel.o -m32 -ffreestanding -fno-stack-protector -c src/kernel/bootstrap.c
 	ld -m elf_i386 -o src/bin/kernel.img -Ttext 0x1000 src/bin/kernel_entry.bin src/bin/kernel.o
 
 	objcopy -O binary -j .text src/bin/kernel.img src/bin/kernel.bin

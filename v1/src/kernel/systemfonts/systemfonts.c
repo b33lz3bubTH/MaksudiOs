@@ -1649,5 +1649,5 @@ unsigned int characters_cheri_7[][150] = {	{
 	}
 }
 
-const int fontWidth = 10;
-const int fontHeight = 15;
+const int systemDefaultFontWidth = 15;
+const int systemDefaultFontHeight = 20;
