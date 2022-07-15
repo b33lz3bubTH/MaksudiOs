@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Fri Jul 15 09:02:01 2022
+# Make data base, printed on Fri Jul 15 17:14:06 2022
 
 # Variables
 
@@ -102,6 +103,10 @@ VSCODE_PID = 1648
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'makefile', line 3)
+FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
+# makefile (from 'makefile', line 2)
+INCLUDES = -I./src
 # environment
 SESSION_MANAGER = local/sourav-tuf:@/tmp/.ICE-unix/840,unix/sourav-tuf:/tmp/.ICE-unix/840
 # automatic
@@ -140,6 +145,8 @@ MOTD_SHOWN = pam
 LC_TIME = en_IN
 # environment
 VSCODE_LOG_NATIVE = false
+# makefile (from 'makefile', line 1)
+FILES = ./build/kernel.asm.o ./build/kernel.o
 # environment
 LC_TELEPHONE = en_IN
 # automatic
@@ -223,7 +230,7 @@ KDE_FULL_SESSION = true
 # environment
 LC_IDENTIFICATION = en_IN
 # variable set hash-table stats:
-# Load=106/1024=10%, Rehash=0, Collisions=5/139=4%
+# Load=109/1024=11%, Rehash=0, Collisions=5/145=3%
 
 # Pattern-specific Variable Values
 
@@ -231,9 +238,9 @@ LC_IDENTIFICATION = en_IN
 
 # Directories
 
-# . (device 66306, inode 8398686): 7 files, no impossibilities.
+# . (device 66306, inode 8398686): 9 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -241,12 +248,81 @@ LC_IDENTIFICATION = en_IN
 
 # Files
 
-debug_bootloader:
+bin/boot.bin: src/boot/boot.asm
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-15 16:37:17.230371583
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 16):
+	nasm -f bin ./src/boot/boot.asm -o ./bin/boot.bin
+
+bin/kernel.bin: build/kernel.asm.o build/kernel.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-15 17:09:21.473621546
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  recipe to execute (from 'makefile', line 12):
+	i686-elf-ld -g -relocatable $(FILES) -o ./build/kernelfull.o
+	i686-elf-gcc -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
+
+build/kernel.o: src/kernel/kernel.c
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-07-15 17:09:21.460288213
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := build/kernel.o
+# automatic
+# * := 
+# automatic
+# < := src/kernel/kernel.c
+# automatic
+# + := src/kernel/kernel.c
+# automatic
+# % := 
+# automatic
+# ^ := src/kernel/kernel.c
+# automatic
+# ? := src/kernel/kernel.c
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'makefile', line 22):
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/bootstrap.c -o ./build/kernel.o
+
+# Not a target:
+src/kernel/kernel.asm:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-07-15 16:22:08.743744479
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/boot/boot.asm:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-15 15:58:21.543806321
+#  File has been updated.
+#  Successfully updated.
+
+clear:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 5):
-	ndisasm ./build/bin/boot.bin
+#  recipe to execute (from 'makefile', line 28):
+	rm -r ./build
+	rm -r ./bin
+
+# Not a target:
+src/kernel/kernel.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-15 17:11:17.423616514
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -254,57 +330,41 @@ debug_bootloader:
 #  Modification time never checked.
 #  File has not been updated.
 
-all: bootloader
+all: bin/boot.bin bin/kernel.bin
 #  Command line target.
-#  Implicit rule search has been done.
+#  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  recipe to execute (from 'makefile', line 6):
+	rm -rf ./bin/os.bin
+	dd if=./bin/boot.bin >> ./bin/os.bin
+	dd if=./bin/kernel.bin >> ./bin/os.bin
+	dd if=/dev/zero bs=512 count=100 >> ./bin/os.bin
 
 run:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 13):
-	qemu-system-x86_64 -hda ./build/bin/boot.bin
+#  recipe to execute (from 'makefile', line 25):
+	qemu-system-x86_64 -hda ./bin/os.bin
+
+build/kernel.asm.o: src/kernel/kernel.asm
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-15 16:37:17.237038249
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 19):
+	nasm -f elf -g ./src/kernel/kernel.asm -o ./build/kernel.asm.o
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-14 21:21:32.608458881
+#  Last modified 2022-07-15 17:14:05.986942541
 #  File has been updated.
 #  Successfully updated.
-
-bootloader:
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := bootloader
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
- 
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'makefile', line 8):
-	mkdir -p build/bin
-	nasm -f bin ./src/boot.asm -o ./build/bin/boot.bin
 
 # Not a target:
 .SUFFIXES:
@@ -313,19 +373,19 @@ bootloader:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/21=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/36=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 129 B / avg = 8 B
-# current buf: size = 8162 B / used = 129 B / count = 15 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 242 B / avg = 10 B
+# current buf: size = 8162 B / used = 242 B / count = 23 / avg = 10 B
 
-# strcache performance: lookups = 26 / hit rate = 42%
+# strcache performance: lookups = 40 / hit rate = 42%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=0/26=0%
-# Finished Make data base on Fri Jul 15 09:02:01 2022
+# Load=23/8192=0%, Rehash=0, Collisions=0/40=0%
+# Finished Make data base on Fri Jul 15 17:14:06 2022
 
  

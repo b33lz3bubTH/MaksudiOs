@@ -1,8 +1,12 @@
 [BITS 32]
+
+global start
+extern kernelStart
+
 CODE_SEG equ 0x08
 DATA_SEG equ 0x10
 
-load32:
+start:
     mov ax, DATA_SEG
     mov ds, ax
     mov es, ax
@@ -21,5 +25,8 @@ load32:
     or al, 2
     out 0x92, al
 
-
+    call kernelStart
     jmp $
+
+
+times 512-($-$$) db 0

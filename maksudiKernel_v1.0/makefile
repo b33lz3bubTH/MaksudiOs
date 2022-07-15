@@ -1,4 +1,6 @@
-FILES = ./build/kernel.asm.o
+FILES = ./build/kernel.asm.o ./build/kernel.o
+INCLUDES = -I./src
+FLAGS= -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
 all: ./bin/boot.bin ./bin/kernel.bin
 	rm -rf ./bin/os.bin
@@ -16,9 +18,11 @@ all: ./bin/boot.bin ./bin/kernel.bin
 ./build/kernel.asm.o: ./src/kernel/kernel.asm
 	nasm -f elf -g ./src/kernel/kernel.asm -o ./build/kernel.asm.o
 
+./build/kernel.o: ./src/kernel/kernel.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/bootstrap.c -o ./build/kernel.o
 
 run:
-	qemu-system-x86_64 -hda ./bin/boot.bin
+	qemu-system-x86_64 -hda ./bin/os.bin
 
 clear:
 	rm -r ./build
@@ -26,4 +30,4 @@ clear:
 
 
 # gdb debugging
-# target remote | qemu-system-x86_64 -hda ./build/bin/boot.bin -S -gdb stdio
+# target remote | qemu-system-x86_64 -hda ./bin/boot.bin -S -gdb stdio

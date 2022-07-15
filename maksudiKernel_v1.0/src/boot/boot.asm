@@ -48,10 +48,9 @@ _loadProtected:
     mov eax, cr0
     or eax, 0x1
     mov cr0, eax
-    ; jmp CODE_SEG:load32   ;as kernel starting point is abstracted, 
+    jmp CODE_SEG:load32   ;as kernel starting point is abstracted, 
                             ; we need to load kernel at some absolute addr and jmp to it
 
-    jmp $
 
 
 _gdtStartLabel:
@@ -85,6 +84,73 @@ _gdtEndLabel:
 _gdtDescriptor:
     dw _gdtEndLabel - _gdtStartLabel
     dd _gdtStartLabel
+
+ [BITS 32]
+ load32:
+    mov eax, 1
+    mov ecx, 100
+    mov edi, 0x0100000
+    call __ataLbaRead__
+    jmp CODE_SEG:0x0100000
+
+__ataLbaRead__:
+    mov ebx, eax, ; Backup the LBA
+    ; Send the highest 8 bits of the lba to hard disk controller
+    shr eax, 24
+    or eax, 0xE0 ; Select the  master drive
+    mov dx, 0x1F6
+    out dx, al
+    ; Finished sending the highest 8 bits of the lba
+
+    ; Send the total sectors to read
+    mov eax, ecx
+    mov dx, 0x1F2
+    out dx, al
+    ; Finished sending the total sectors to read
+
+    ; Send more bits of the LBA
+    mov eax, ebx ; Restore the backup LBA
+    mov dx, 0x1F3
+    out dx, al
+    ; Finished sending more bits of the LBA
+
+    ; Send more bits of the LBA
+    mov dx, 0x1F4
+    mov eax, ebx ; Restore the backup LBA
+    shr eax, 8
+    out dx, al
+    ; Finished sending more bits of the LBA
+
+    ; Send upper 16 bits of the LBA
+    mov dx, 0x1F5
+    mov eax, ebx ; Restore the backup LBA
+    shr eax, 16
+    out dx, al
+    ; Finished sending upper 16 bits of the LBA
+
+    mov dx, 0x1f7
+    mov al, 0x20
+    out dx, al
+
+    ; Read all sectors into memory
+    _nextSectorLabel:
+        push ecx
+
+    ; Checking if we need to read
+    _ataLbaReadTryAgainLabel:
+        mov dx, 0x1f7
+        in al, dx
+        test al, 8
+        jz _ataLbaReadTryAgainLabel
+
+    ; We need to read 256 words at a time
+    mov ecx, 256
+    mov dx, 0x1F0
+    rep insw
+    pop ecx
+    loop _nextSectorLabel
+    ; End of reading sectors into memory
+    ret
 
 times 510-($ - $$) db 0
 dw 0xAA55
