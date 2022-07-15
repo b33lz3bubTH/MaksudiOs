@@ -32,16 +32,6 @@ times 33 db 0   ; prevent writing somthing to our program [This is BIOS Paramete
 start:
     jmp 0:init         ;this will set the code segment to 0x7c0
 
-_interuptHandleZERO:
-    mov si, interuptZeroLabel
-    call __printF__
-    iret
-
-_interuptHandleONE:
-    mov si, interuptOneLabel
-    call __printF__
-    iret
-
 init:
     cli ;clear interupts
     mov ax, 0
@@ -58,31 +48,10 @@ _loadProtected:
     mov eax, cr0
     or eax, 0x1
     mov cr0, eax
-    jmp CODE_SEG:load32
+    ; jmp CODE_SEG:load32   ;as kernel starting point is abstracted, 
+                            ; we need to load kernel at some absolute addr and jmp to it
 
-    ; ================ Custom Interupts ==================
-    ; ; interupt vector table add, custom interupt 
-    ; mov word[ss:0x00], _interuptHandleZERO      ; if ss isnt given, it will use ds(0x7c0) interupt needs 4 bytes
-    ; mov word[ss: 0x02], 0x7c0
-
-    ; mov word[ss:0x04], _interuptHandleONE      ; if ss isnt given, it will use ds(0x7c0)
-    ; mov word[ss: 0x06], 0x7c0                  ; 2bytes
-    
-    ; ; int 1                                    ; disabled
-    ; ================ Custom Interupts ==================
-    
-    ; ================ Print Demo ================
-    ; mov si, bootloaderInit
-    ; call __printF__
-
-    ; mov si, bootstrapingKernelLoadMessage
-    ; call __printF__
-
-    ; jmp $
-    ; ================ Print Demo ================
-
-
-
+    jmp $
 
 
 _gdtStartLabel:
@@ -116,43 +85,6 @@ _gdtEndLabel:
 _gdtDescriptor:
     dw _gdtEndLabel - _gdtStartLabel
     dd _gdtStartLabel
-
-
-__printF__:
-    mov bx, 0
-    _printFLoop:
-        lodsb
-        cmp al, 0
-        je _printFdone
-        call __printChar__
-        jmp _printFLoop
-    _printFdone:
-        ret
-__printChar__:
-    mov ah, 0eh
-    int 0x10
-    ret
-
-bootloaderInit: db 'Maksudi Os v1.0', 0xa, 0
-bootstrapingKernelLoadMessage: db 'Bootstraping ... [Kernel Loading]', 0xa, 0
-interuptZeroLabel: db 'Interupt Zero Occured', 0xa, 0
-interuptOneLabel: db 'Interupt One Occured', 0xa, 0
-
-
-
-[BITS 32]
-load32:
-    mov ax, DATA_SEG
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
-
-    mov ebp, 0x00200000
-    mov esp, ebp
-    jmp $
-
 
 times 510-($ - $$) db 0
 dw 0xAA55

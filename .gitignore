@@ -56,4 +56,5 @@ dkms.conf
 v1/src/bin
 v1/os.img
 
-v2/bin
+maksudiKernel_v1.0/bin
+maksudiKernel_v1.0/build
