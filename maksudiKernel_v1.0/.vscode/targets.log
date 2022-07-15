@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Fri Jul 15 17:14:06 2022
+# Make data base, printed on Fri Jul 15 18:26:50 2022
 
 # Variables
 
@@ -20,7 +19,7 @@ NO_AT_BRIDGE = 1
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/home/sourav/.gtkrc:/home/sourav/.config/gtkrc
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e1fec8b6-b141-4efa-8f2c-ff46e9cf9080.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-17b79f04-bbf8-4b65-acab-ae947c854419.sock
 # environment
 LC_NAME = en_IN
 # environment
@@ -98,7 +97,7 @@ MAKEFILE_LIST := makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 1648
+VSCODE_PID = 136504
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -258,7 +257,7 @@ bin/boot.bin: src/boot/boot.asm
 
 bin/kernel.bin: build/kernel.asm.o build/kernel.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-15 17:09:21.473621546
+#  Last modified 2022-07-15 17:51:21.370178936
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -270,7 +269,7 @@ bin/kernel.bin: build/kernel.asm.o build/kernel.o
 build/kernel.o: src/kernel/kernel.c
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
-#  Last modified 2022-07-15 17:09:21.460288213
+#  Last modified 2022-07-15 17:51:21.356845603
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -288,6 +287,7 @@ build/kernel.o: src/kernel/kernel.c
 # automatic
 # ? := src/kernel/kernel.c
 # automatic
+ 
 # | := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/13=8%
@@ -297,7 +297,6 @@ build/kernel.o: src/kernel/kernel.c
 # Not a target:
 src/kernel/kernel.asm:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-07-15 16:22:08.743744479
 #  File has been updated.
 #  Successfully updated.
@@ -320,7 +319,7 @@ clear:
 # Not a target:
 src/kernel/kernel.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-15 17:11:17.423616514
+#  Last modified 2022-07-15 17:52:45.163508638
 #  File has been updated.
 #  Successfully updated.
 
@@ -386,6 +385,6 @@ makefile:
 # strcache performance: lookups = 40 / hit rate = 42%
 # hash-table stats:
 # Load=23/8192=0%, Rehash=0, Collisions=0/40=0%
-# Finished Make data base on Fri Jul 15 17:14:06 2022
+# Finished Make data base on Fri Jul 15 18:26:50 2022
 
  
