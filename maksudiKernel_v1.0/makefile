@@ -11,3 +11,7 @@ bootloader:
 
 run:
 	qemu-system-x86_64 -hda ./build/bin/boot.bin
+
+
+# gdb debugging
+# target remote | qemu-system-x86_64 -hda ./build/bin/boot.bin -S -gdb stdio
