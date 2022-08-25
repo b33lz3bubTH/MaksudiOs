@@ -1,4 +1,4 @@
-FILES = ./build/kernel.asm.o ./build/kernel.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/intdt/intdt.asm.o ./build/intdt/intdt.o ./build/memory/memory.o
 INCLUDES = -I./src
 FLAGS= -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -20,6 +20,16 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/kernel.o: ./src/kernel/kernel.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/bootstrap.c -o ./build/kernel.o
+
+
+./build/intdt/intdt.asm.o: ./src/intdt/intdt.asm
+	nasm -f elf -g ./src/intdt/intdt.asm -o ./build/intdt/intdt.asm.o
+
+./build/intdt/intdt.o: ./src/intdt/intdt.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/intdt/intdt.c -o ./build/intdt/intdt.o
+
+./build/memory/memory.o: ./src/memory/memory.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/memory.c -o ./build/memory/memory.o
 
 run:
 	qemu-system-x86_64 -hda ./bin/os.bin

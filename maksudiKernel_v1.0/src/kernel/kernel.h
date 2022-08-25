@@ -7,5 +7,6 @@
 #define DefSysTextColor 15
 
 void kernelStart();
+void printString(const char* str);
 
 #endif

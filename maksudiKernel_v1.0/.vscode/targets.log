@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Fri Jul 15 18:26:50 2022
+# Make data base, printed on Thu Aug 25 15:15:54 2022
 
 # Variables
 
@@ -17,15 +18,19 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
+PNPM_HOME = /home/sourav/.local/share/pnpm
+# environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/home/sourav/.gtkrc:/home/sourav/.config/gtkrc
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-17b79f04-bbf8-4b65-acab-ae947c854419.sock
+KONSOLE_DBUS_SERVICE = :1.99
 # environment
 LC_NAME = en_IN
 # environment
 LC_NUMERIC = en_IN
 # environment
-VSCODE_CWD = /home/sourav
+VSCODE_CWD = /home/sourav/Documents/MaksudiOs
+# environment
+WINDOWID = 90177543
 # environment
 LC_ADDRESS = en_IN
 # default
@@ -35,6 +40,8 @@ GTK3_MODULES = xapp-gtk3-module
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
+KONSOLE_VERSION = 220403
+# environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
@@ -43,17 +50,21 @@ PWD = /home/sourav/Documents/MaksudiOs/maksudiKernel_v1.0
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
 MAIL = /var/spool/mail/sourav
 # environment
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# environment
+OLDPWD = /home/sourav/Documents
+# environment
+KONSOLE_DBUS_WINDOW = /Windows/1
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
-# environment
-VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/sourav/.config/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+VSCODE_CODE_CACHE_PATH = /home/sourav/.config/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
 # environment
@@ -64,14 +75,14 @@ XAUTHORITY = /home/sourav/.Xauthority
 .LOADED := 
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+COLORFGBG = 15;0
 # makefile
 MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/sourav/Documents/MaksudiOs/maksudiKernel_v1.0
 # environment
-VSCODE_PIPE_LOGGING = true
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -95,9 +106,9 @@ MAKEFILE_LIST := makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_VERBOSE_LOGGING = true
+ZSH = /home/sourav/.oh-my-zsh
 # environment
-VSCODE_PID = 136504
+VSCODE_PID = 21585
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -106,8 +117,6 @@ XDG_SESSION_TYPE = x11
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 # makefile (from 'makefile', line 2)
 INCLUDES = -I./src
-# environment
-SESSION_MANAGER = local/sourav-tuf:@/tmp/.ICE-unix/840,unix/sourav-tuf:/tmp/.ICE-unix/840
 # automatic
 *F = $(notdir $*)
 # environment
@@ -125,15 +134,19 @@ SHELL = /bin/sh
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 2
+# environment
+PROFILEHOME = 
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/sourav/.cargo/bin:/home/sourav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
+PATH = /home/sourav/.local/share/pnpm:/home/sourav/.cargo/bin:/home/sourav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 # default
 MAKEFILES := 
+# environment
+LANGUAGE = 
 # environment
 LC_MONETARY = en_IN
 # environment
@@ -143,9 +156,9 @@ MOTD_SHOWN = pam
 # environment
 LC_TIME = en_IN
 # environment
-VSCODE_LOG_NATIVE = false
+INVOCATION_ID = 716e8bf15f7945f992e544dfbd8f78be
 # makefile (from 'makefile', line 1)
-FILES = ./build/kernel.asm.o ./build/kernel.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/intdt/intdt.asm.o ./build/intdt/intdt.o ./build/memory/memory.o
 # environment
 LC_TELEPHONE = en_IN
 # automatic
@@ -156,10 +169,14 @@ KDE_APPLICATIONS_AS_SCOPE = 1
 XDG_SEAT = seat0
 # environment
 XDG_CURRENT_DESKTOP = KDE
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
 # automatic
 +F = $(notdir $+)
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+LESS = -R
 # environment
 DESKTOP_SESSION = plasma
 # environment
@@ -173,7 +190,7 @@ XDG_VTNR = 1
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 719
+SYSTEMD_EXEC_PID = 810
 # environment
 DISPLAY = :0
 # environment
@@ -185,13 +202,23 @@ MAKE_VERSION := 4.3
 # environment
 KDE_SESSION_UID = 1000
 # environment
+KONSOLE_DBUS_SESSION = /Sessions/1
+# environment
+MANAGERPID = 688
+# environment
 LC_MEASUREMENT = en_IN
+# environment
+PAGER = less
 # environment
 _ = /usr/bin/make
 # environment
 LC_PAPER = en_IN
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
+# environment
+COLORTERM = truecolor
+# environment
+JOURNAL_STREAM = 8:20265
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -203,7 +230,9 @@ HOME = /home/sourav
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-cc6656e9-1.68.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-cc6656e9-1.70.2-main.sock
+# environment
+TERM = xterm-256color
 # environment
 XDG_SESSION_ID = 2
 # environment
@@ -217,9 +246,12 @@ SUFFIXES :=
 # environment
 QT_AUTO_SCREEN_SCALE_FACTOR = 0
 # environment
+ 
 VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SHELL_SESSION_ID = 492eb7fb9c004052ad0965d04ace5c27
 # environment
 KDE_SESSION_VERSION = 5
 # default
@@ -229,7 +261,7 @@ KDE_FULL_SESSION = true
 # environment
 LC_IDENTIFICATION = en_IN
 # variable set hash-table stats:
-# Load=109/1024=11%, Rehash=0, Collisions=5/145=3%
+# Load=124/1024=12%, Rehash=0, Collisions=10/160=6%
 
 # Pattern-specific Variable Values
 
@@ -255,9 +287,16 @@ bin/boot.bin: src/boot/boot.asm
 #  recipe to execute (from 'makefile', line 16):
 	nasm -f bin ./src/boot/boot.asm -o ./bin/boot.bin
 
-bin/kernel.bin: build/kernel.asm.o build/kernel.o
+# Not a target:
+src/intdt/intdt.asm:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 14:57:16.745816575
+#  File has been updated.
+#  Successfully updated.
+
+bin/kernel.bin: build/kernel.asm.o build/kernel.o build/intdt/intdt.asm.o build/intdt/intdt.o build/memory/memory.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-15 17:51:21.370178936
+#  Last modified 2022-08-25 13:50:35.552657689
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -266,33 +305,28 @@ bin/kernel.bin: build/kernel.asm.o build/kernel.o
 	i686-elf-ld -g -relocatable $(FILES) -o ./build/kernelfull.o
 	i686-elf-gcc -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
 
+build/intdt/intdt.asm.o: src/intdt/intdt.asm
+#  Implicit rule search has not been done.
+#  Last modified 2022-08-25 15:15:37.519101879
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 26):
+	nasm -f elf -g ./src/intdt/intdt.asm -o ./build/intdt/intdt.asm.o
+
 build/kernel.o: src/kernel/kernel.c
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  Last modified 2022-07-15 17:51:21.356845603
+#  Last modified 2022-08-25 13:50:35.535991023
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := build/kernel.o
-# automatic
-# * := 
-# automatic
-# < := src/kernel/kernel.c
-# automatic
-# + := src/kernel/kernel.c
-# automatic
-# % := 
-# automatic
-# ^ := src/kernel/kernel.c
-# automatic
-# ? := src/kernel/kernel.c
-# automatic
- 
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  Successfully updated.
 #  recipe to execute (from 'makefile', line 22):
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/bootstrap.c -o ./build/kernel.o
+
+build/memory/memory.o: src/memory/memory.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 32):
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/memory.c -o ./build/memory/memory.o
 
 # Not a target:
 src/kernel/kernel.asm:
@@ -312,14 +346,14 @@ clear:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 28):
+#  recipe to execute (from 'makefile', line 38):
 	rm -r ./build
 	rm -r ./bin
 
 # Not a target:
 src/kernel/kernel.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-15 17:52:45.163508638
+#  Last modified 2022-07-18 10:16:32.767238641
 #  File has been updated.
 #  Successfully updated.
 
@@ -347,8 +381,15 @@ run:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 25):
+#  recipe to execute (from 'makefile', line 35):
 	qemu-system-x86_64 -hda ./bin/os.bin
+
+# Not a target:
+src/intdt/intdt.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-25 14:59:33.539143962
+#  File has been updated.
+#  Successfully updated.
 
 build/kernel.asm.o: src/kernel/kernel.asm
 #  Implicit rule search has not been done.
@@ -358,12 +399,46 @@ build/kernel.asm.o: src/kernel/kernel.asm
 #  recipe to execute (from 'makefile', line 19):
 	nasm -f elf -g ./src/kernel/kernel.asm -o ./build/kernel.asm.o
 
+build/intdt/intdt.o: src/intdt/intdt.c
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := build/intdt/intdt.o
+# automatic
+# * := 
+# automatic
+# < := src/intdt/intdt.c
+# automatic
+# + := src/intdt/intdt.c
+# automatic
+# % := 
+# automatic
+# ^ := src/intdt/intdt.c
+# automatic
+# ? := src/intdt/intdt.c
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'makefile', line 29):
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/intdt/intdt.c -o ./build/intdt/intdt.o
+
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-15 17:14:05.986942541
+#  Last modified 2022-08-25 15:15:05.56576995
+ 
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+src/memory/memory.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -372,19 +447,19 @@ makefile:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/36=0%
+# Load=19/1024=2%, Rehash=0, Collisions=0/51=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 23 / storage = 242 B / avg = 10 B
-# current buf: size = 8162 B / used = 242 B / count = 23 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 366 B / avg = 12 B
+# current buf: size = 8162 B / used = 366 B / count = 29 / avg = 12 B
 
-# strcache performance: lookups = 40 / hit rate = 42%
+# strcache performance: lookups = 52 / hit rate = 44%
 # hash-table stats:
-# Load=23/8192=0%, Rehash=0, Collisions=0/40=0%
-# Finished Make data base on Fri Jul 15 18:26:50 2022
+# Load=29/8192=0%, Rehash=0, Collisions=0/52=0%
+# Finished Make data base on Thu Aug 25 15:15:54 2022
 
  
