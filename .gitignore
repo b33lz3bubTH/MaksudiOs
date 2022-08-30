@@ -58,3 +58,8 @@ v1/os.img
 
 maksudiKernel_v1.0/bin
 maksudiKernel_v1.0/build
+
+
+
+**/target/
+**/Cargo.lock
