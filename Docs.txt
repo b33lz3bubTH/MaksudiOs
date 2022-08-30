@@ -1,0 +1,11 @@
+Build Problems:
+
+
+rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
+
+make build** for success builds.
+
+
+# must [thanks to the community and fuck off os-phil-opp for wrong shits.]
+https://github.com/rust-lang/cargo/issues/8512
+cargo install bootimage -Zbuild-std=core --target x86_64-maksudi_os.json 
