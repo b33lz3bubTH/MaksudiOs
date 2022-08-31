@@ -1,6 +1,9 @@
 use core::fmt::Write;
 use volatile::Volatile;
 use core::fmt;
+use lazy_static::lazy_static;
+use spin::Mutex;
+
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -55,6 +58,10 @@ pub struct Writer {
     row_position: usize,
     color_code: ColorCode,
     buffer: &'static mut Buffer,
+    
+    // 2D array to store ScreenChar{...} that goes into vga buffer, when reached
+    // end of the last row and and more text to be filled, 
+    // then delete the first row and upshift every row to-> (row-1)
 }
 
 impl Writer {
@@ -70,15 +77,7 @@ impl Writer {
                 let col = self.column_position;
 
                 let color_code = self.color_code;
-
-                // ---------------------------------
-                // only write possible not read with this.
-                // ---------------------------------
-                // self.buffer.chars[row][col] = ScreenChar {
-                //     ascii_character: byte,
-                //     color_code,
-                // };
-
+                
                 self.buffer.chars[row][col].write(ScreenChar {
                     ascii_character: byte,
                     color_code,
@@ -110,7 +109,7 @@ impl Writer {
         }
     }
 
-    fn default_screen(&mut self) {
+    pub fn default_screen(&mut self) {
         for row in 0..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
                 self.write_byte(b' ');
@@ -119,13 +118,6 @@ impl Writer {
         self.column_position = 0;
         self.row_position = 0;
 
-        // test case //
-        let tempChar: ScreenChar = self.buffer.chars[0][2].read();
-
-        self.buffer.chars[0][0].write(ScreenChar {
-            ascii_character: tempChar.ascii_character,
-            color_code: self.color_code,
-        });
     }
 }
 impl fmt::Write for Writer {
@@ -135,16 +127,29 @@ impl fmt::Write for Writer {
     }
 }
 
-pub fn print_test(){
-    let mut writer = Writer {
+lazy_static! {
+    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
+        row_position:0,
         column_position: 0,
-        row_position: 0,
-        color_code: ColorCode::new(Color::Blue, Color::White),
-        buffer: unsafe {
-            &mut *(0xb8000 as *mut Buffer)
-        }, // Display Buffer
-    };
-    writer.default_screen();
-    writer.write_string("Maksudi Os!\n maksudi\n");
-    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
+    });
+}
+
+
+#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
+}
+
+#[macro_export]
+macro_rules! println {
+    () => ($crate::print!("\n"));
+    ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
+}
+
+#[doc(hidden)]
+pub fn _print(args: fmt::Arguments) {
+    use core::fmt::Write;
+    WRITER.lock().write_fmt(args).unwrap();
 }
