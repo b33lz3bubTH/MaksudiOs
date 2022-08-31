@@ -3,7 +3,7 @@
 
 use core::panic::PanicInfo;
 
-static HELLO: &[u8] = b"Hello World!";
+static HELLO: &[u8] = b"Oh My Maksudi";
 
 /// This function is called on panic.
 #[panic_handler]
