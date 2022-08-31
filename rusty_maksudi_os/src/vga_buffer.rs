@@ -1,4 +1,6 @@
 use core::fmt::Write;
+use volatile::Volatile;
+use core::fmt;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -45,7 +47,7 @@ const BUFFER_WIDTH: usize = 80;
 
 #[repr(transparent)]
 struct Buffer {
-    chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
+    chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
 pub struct Writer {
@@ -68,10 +70,20 @@ impl Writer {
                 let col = self.column_position;
 
                 let color_code = self.color_code;
-                self.buffer.chars[row][col] = ScreenChar {
+
+                // ---------------------------------
+                // only write possible not read with this.
+                // ---------------------------------
+                // self.buffer.chars[row][col] = ScreenChar {
+                //     ascii_character: byte,
+                //     color_code,
+                // };
+
+                self.buffer.chars[row][col].write(ScreenChar {
                     ascii_character: byte,
                     color_code,
-                };
+                });
+
                 self.column_position += 1;
             }
         }
@@ -92,9 +104,34 @@ impl Writer {
     fn new_line(&mut self) {
         self.column_position = 0;
         self.row_position += 1;
-        if(self.row_position >= BUFFER_HEIGHT){
+        if self.row_position >= BUFFER_HEIGHT {
             // last row
+            // delete the top row and shift everything up to make the room for a new row
         }
+    }
+
+    fn default_screen(&mut self) {
+        for row in 0..BUFFER_HEIGHT {
+            for col in 0..BUFFER_WIDTH {
+                self.write_byte(b' ');
+            }
+        }
+        self.column_position = 0;
+        self.row_position = 0;
+
+        // test case //
+        let tempChar: ScreenChar = self.buffer.chars[0][2].read();
+
+        self.buffer.chars[0][0].write(ScreenChar {
+            ascii_character: tempChar.ascii_character,
+            color_code: self.color_code,
+        });
+    }
+}
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
     }
 }
 
@@ -107,8 +144,7 @@ pub fn print_test(){
             &mut *(0xb8000 as *mut Buffer)
         }, // Display Buffer
     };
-
-    writer.write_string("Maksudi Os!\n maksudi");
-    writer.write_string("Oyeeee Bandar eeee booooo");
-
+    writer.default_screen();
+    writer.write_string("Maksudi Os!\n maksudi\n");
+    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
 }
