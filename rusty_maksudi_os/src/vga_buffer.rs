@@ -110,16 +110,24 @@ impl Writer {
     }
 
     pub fn default_screen(&mut self) {
-        for row in 0..BUFFER_HEIGHT {
-            for col in 0..BUFFER_WIDTH {
+        for _row in 0..BUFFER_HEIGHT {
+            for _col in 0..BUFFER_WIDTH {
                 self.write_byte(b' ');
             }
         }
         self.column_position = 0;
         self.row_position = 0;
+    }
 
+    pub fn printkn(&mut self, s: &str) {
+        let current_color = self.color_code;
+
+        self.color_code = ColorCode::new(Color::Red, Color::Black);
+        self.write_string(s);
+        self.color_code = current_color;
     }
 }
+
 impl fmt::Write for Writer {
     fn write_str(&mut self, s: &str) -> fmt::Result {
         self.write_string(s);
@@ -150,6 +158,5 @@ macro_rules! println {
 
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
-    use core::fmt::Write;
     WRITER.lock().write_fmt(args).unwrap();
 }

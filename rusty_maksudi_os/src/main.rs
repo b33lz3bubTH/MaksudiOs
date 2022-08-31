@@ -4,7 +4,6 @@ mod vga_buffer;
 
 use core::panic::PanicInfo;
 
-static HELLO: &[u8] = b"Oh My Maksudi";
 
 /// This function is called on panic.
 #[panic_handler]
@@ -15,6 +14,10 @@ fn panic(_info: &PanicInfo) -> ! {
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    println!("Hello World{}", "!");
+
+    let version_number = "v0.1";
+    vga_buffer::WRITER.lock().default_screen();
+    println!("Rusty Maksudi Kernel\n{}", version_number);
+
     loop {}
 }
