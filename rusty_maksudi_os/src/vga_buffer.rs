@@ -73,7 +73,7 @@ impl Writer {
                     self.new_line();
                 }
 
-                let row = self.row_position;
+                let row = BUFFER_HEIGHT - 1;
                 let col = self.column_position;
 
                 let color_code = self.color_code;
@@ -100,13 +100,25 @@ impl Writer {
         }
     }
 
-    fn new_line(&mut self) {
-        self.column_position = 0;
-        self.row_position += 1;
-        if self.row_position >= BUFFER_HEIGHT {
-            // last row
-            // delete the top row and shift everything up to make the room for a new row
+    fn clear_row(&mut self, row: usize) {
+        let blank = ScreenChar {
+            ascii_character: b' ',
+            color_code: self.color_code,
+        };
+        for col in 0..BUFFER_WIDTH {
+            self.buffer.chars[row][col].write(blank);
         }
+    }
+
+    fn new_line(&mut self) {
+        for row in 1..BUFFER_HEIGHT {
+            for col in 0..BUFFER_WIDTH {
+                let character = self.buffer.chars[row][col].read();
+                self.buffer.chars[row - 1][col].write(character);
+            }
+        }
+        self.clear_row(BUFFER_HEIGHT - 1);
+        self.column_position = 0;
     }
 
     pub fn default_screen(&mut self) {

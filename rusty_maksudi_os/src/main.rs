@@ -18,5 +18,15 @@ pub extern "C" fn _start() -> ! {
     let version_number = "v0.1";
     vga_buffer::WRITER.lock().default_screen();
     println!("Rusty Maksudi Kernel\n{}", version_number);
+
+    
+    rusty_maksudi_os::init();
+    
+    // invoke a breakpoint exception
+    x86_64::instructions::interrupts::int3(); 
+
+
+    println!("It did not crash!");
+
     loop {}
 }
