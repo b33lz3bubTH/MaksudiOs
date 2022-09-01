@@ -63,3 +63,5 @@ maksudiKernel_v1.0/build
 
 **/target/
 **/Cargo.lock
+
+**/.idea/

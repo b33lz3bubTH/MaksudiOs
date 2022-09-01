@@ -8,7 +8,7 @@
 
 #======== Road Map ========#
 1. Memset
-2. PrintFunc
+2. PrintFunc [ Done ]
 3. PrintKern
 4. Gdt (Shit)
 5. More mem related stuffs
