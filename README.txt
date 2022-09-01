@@ -9,8 +9,8 @@
 #======== Road Map ========#
 1. Memset
 2. PrintFunc [ Done ]
-3. PrintKern
-4. Gdt (Shit)
+3. PrintKern [ Done ]
+4. Gdt (Shit) [ Done ]
 5. More mem related stuffs
 6. os scheduler (long short and medium)
 7. paging shit *** not Crying *** :(
