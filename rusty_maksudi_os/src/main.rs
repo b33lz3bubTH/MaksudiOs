@@ -16,17 +16,25 @@ fn panic(_info: &PanicInfo) -> ! {
 pub extern "C" fn _start() -> ! {
 
     let version_number = "v0.1";
+
     vga_buffer::WRITER.lock().default_screen();
-    println!("Rusty Maksudi Kernel\n{}", version_number);
+    println!("Rusty Maksudi Kernel: {}", version_number);
 
     
     rusty_maksudi_os::init();
     
     // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3(); 
+    // Crash Test
+    // x86_64::instructions::interrupts::int3(); 
 
 
-    println!("It did not crash!");
+    // a page fault
+    unsafe {
+        *(0xdeadbeef as *mut u64) = 42;
+    };
+    
+
+    println!("HorenPokHorenPok 1..2..3\n");
 
     loop {}
 }
