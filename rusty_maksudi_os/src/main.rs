@@ -29,9 +29,17 @@ pub extern "C" fn _start() -> ! {
 
 
     // a page fault
-    unsafe {
-        *(0xdeadbeef as *mut u64) = 42;
-    };
+    // unsafe {
+    //     *(0xdeadbeef as *mut u64) = 42;
+    // };
+
+    fn over_flow(x: i32){
+        if x == 10{
+            return;
+        }
+        over_flow(x);
+    }
+    // over_flow(20000);
     
 
     println!("HorenPokHorenPok 1..2..3\n");
